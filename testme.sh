@@ -1,0 +1,10 @@
+#!/bin/bash
+
+BUCKET=$1
+SUBJECT=$2
+INPUT_PREFIX=${3:-bids}
+OUTPUT_PREFIX=${4:-deriv}
+TOEXCLUDE="${INPUT_PREFIX}/sub-??/*"
+
+echo $INPUT_PREFIX
+echo $TOEXCLUDE

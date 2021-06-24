@@ -259,9 +259,11 @@ RUN find $HOME -type d -exec chmod go=u {} + && \
 
 ENV IS_DOCKER_8395080871=1
 
+COPY fmriprep-cusacklab.bash /usr/local/miniconda/bin/fmriprep-cusacklab.bash
+
 RUN ldconfig
 WORKDIR /tmp
-ENTRYPOINT ["/usr/local/miniconda/bin/fmriprep"]
+ENTRYPOINT ["/usr/local/miniconda/bin/fmriprep-cusacklab.bash"]
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -274,3 +276,8 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.vcs-url="https://github.com/nipreps/fmriprep" \
       org.label-schema.version=$VERSION \
       org.label-schema.schema-version="1.0"
+
+RUN pip install awscli
+
+COPY license.txt /tmp/license.txt
+ENV FS_LICENSE=/tmp/license.txt
